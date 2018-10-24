@@ -1,0 +1,9 @@
+.buttons-for-answer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.main-block {
+  max-width: 400px;
+  padding-top: 30px;
+}
