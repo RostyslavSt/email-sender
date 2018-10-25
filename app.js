@@ -20,6 +20,10 @@ app.get('/temp', function(req, res) {
   res.sendFile(path.join(__dirname + '/templates/temp.html'));
 });
 
+app.get('/tempMain', function(req, res) {
+  res.sendFile(path.join(__dirname + '/templates/main.html'));
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
