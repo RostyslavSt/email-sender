@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var app = express();
 require('dotenv').config();
 
 var index = require('./routes/index');
@@ -13,36 +13,58 @@ var authorize = require('./routes/authorize');
 var mail = require('./routes/mail');
 var calendar = require('./routes/calendar');
 var contacts = require('./routes/contacts');
+var cont = require('./routes/cont');
+var sendLetter = require('./routes/sendLetter');
+var send = require('./routes/send');
+var formForLetter = require('./routes/formForLetter');
 
-var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/temp', function(req, res) {
-  res.sendFile(path.join(__dirname + '/templates/temp.html'));
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader("Access-Control-Allow-Headers", "Content-type,Accept,X-Custom-Header");
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  // res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
 });
 
+app.post('/testPost', function(req, res) {
+  console.log(req.body);
+  res.send({"stautus": JSON.stringify(req.body)});
+});
+
+// app.post('/sendLetter', send);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// test end points
+
+app.get('/test', function(req, res) {
+  res.send({status: "ok"});
+});
 app.get('/tempMain', function(req, res) {
   res.sendFile(path.join(__dirname + '/templates/main.html'));
 });
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', index);
 app.use('/authorize', authorize);
 app.use('/mail', mail);
-// app.use('/template')
 app.use('/calendar', calendar);
 app.use('/contacts', contacts);
+app.use('/cont', cont);
+app.use('/formForLetter', formForLetter);
+app.use('/sendLetter', sendLetter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

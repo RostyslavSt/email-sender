@@ -6,58 +6,27 @@ var graph = require('@microsoft/microsoft-graph-client');
 
 /* GET /contacts */
 router.get('/', async function (req, res, next) {
-  console.log('sttt1');
-  let parms = {
-    title: 'Contacts',
+   let parms = {
+    title: 'Send Letter',
     active: {
-      cont: true
+      sendLetter: true
     }
   };
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
-  console.log(accessToken);
-  console.log(userName);
-
-
   if (accessToken && userName) {
     parms.user = userName;
-    console.log('sttt2');
-
+   
     // Initialize Graph client
     const client = graph.Client.init({
       authProvider: (done) => {
         done(null, accessToken);
       }
     });
-
+    console.log('step3');
     try {
-    
-     const body = {
-        Message: {
-          Subject: "Meet for lunch?",
-          Body: {
-            ContentType: "Text",
-            Content: "The new cafeteria is open."
-          },
-          ToRecipients: [
-            {
-              EmailAddress: {
-                Address: "rost.sht@gmail.com"
-              }
-            }
-          ]        
-        },
-        SaveToSentItems: "true"
-      }
-
-     const result = await client
-      .api('/me/sendMail')
-      .post(body, (err, res) => {
-        console.log(res);
-        console.log(err);
-       });
-      console.log(result);
+      res.render('formForLetter', parms);
     } catch (err) {
       parms.message = 'Error retrieving contacts';
       parms.error = {
@@ -68,7 +37,6 @@ router.get('/', async function (req, res, next) {
     }
 
   } else {
-    // Redirect to home
     res.redirect('/');
   }
 });

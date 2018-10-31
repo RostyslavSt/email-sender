@@ -8,6 +8,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/template.css' />
   </head>
   <body>
     <!-- Nav bar -->
@@ -30,6 +31,12 @@
             </li>
             <li class="nav-item{{#if active.contacts}} active{{/if}}">
               <a class="nav-link" href="/contacts">Contacts</a>
+            </li>
+            <li class="nav-item{{#if active.cont}} active{{/if}}">
+              <a class="nav-link" href="/cont">Cont</a>
+            </li>
+             <li class="nav-item{{#if active.sendLetter}} active{{/if}}">
+              <a class="nav-link" href="/formForLetter">Send Letter</a>
             </li>
           {{/if}}
         </ul>

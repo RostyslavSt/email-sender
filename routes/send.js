@@ -4,25 +4,21 @@ var router = express.Router();
 var authHelper = require('../helpers/auth');
 var graph = require('@microsoft/microsoft-graph-client');
 
-/* GET /contacts */
-router.get('/', async function (req, res, next) {
-  console.log('sttt1');
-  let parms = {
-    title: 'Contacts',
-    active: {
-      cont: true
-    }
-  };
+function send(req, res, next) {
+  console.log(req.body);
+  
+  // let parms = {
+  //   title: 'Send Letter',
+  //   active: {
+  //     sendLetter: true
+  //   }
+  // };
 
-  const accessToken = await authHelper.getAccessToken(req.cookies, res);
+  const accessToken = authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
-  console.log(accessToken);
-  console.log(userName);
-
 
   if (accessToken && userName) {
     parms.user = userName;
-    console.log('sttt2');
 
     // Initialize Graph client
     const client = graph.Client.init({
@@ -35,7 +31,7 @@ router.get('/', async function (req, res, next) {
     
      const body = {
         Message: {
-          Subject: "Meet for lunch?",
+          Subject: "Meet for lunch2?",
           Body: {
             ContentType: "Text",
             Content: "The new cafeteria is open."
@@ -51,7 +47,7 @@ router.get('/', async function (req, res, next) {
         SaveToSentItems: "true"
       }
 
-     const result = await client
+     const result = client
       .api('/me/sendMail')
       .post(body, (err, res) => {
         console.log(res);
@@ -71,6 +67,7 @@ router.get('/', async function (req, res, next) {
     // Redirect to home
     res.redirect('/');
   }
-});
+  // res.send({"stautus": JSON.stringify(req.body)});
 
-module.exports = router;
+}
+module.exports = send;

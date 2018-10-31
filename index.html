@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>email sender</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel='stylesheet' href='./public/stylesheets/style.css' />
+  <link rel='stylesheet' href='./public/stylesheets/template.css' />
+</head>
+
+<body>
+  <!-- Nav bar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">Node Graph Tutorial</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item{{#if active.home}} active{{/if}}">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <!-- -------- -->
+        <li class="nav-item{{#if active.inbox}} active{{/if}}">
+          <a class="nav-link" href="/mail">Inbox</a>
+        </li>
+        <li class="nav-item{{#if active.calendar}} active{{/if}}">
+          <a class="nav-link" href="/calendar">Calendar</a>
+        </li>
+        <li class="nav-item{{#if active.contacts}} active{{/if}}">
+          <a class="nav-link" href="/contacts">Contacts</a>
+        </li>
+        <li class="nav-item{{#if active.cont}} active{{/if}}">
+          <a class="nav-link" href="/cont">Cont</a>
+        </li>
+        <li class="nav-item{{#if active.sendLetter}} active{{/if}}">
+          <a class="nav-link" href="/sendLetter">Send Letter</a>
+        </li>
+        <!-- -------- -->
+      </ul>
+      <ul class="navbar-nav justify-content-end">
+        <!-- ---------- -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">{{user}}</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/authorize/signout">Sign Out</a>
+          </div>
+        </li>
+        <!-- -------- -->
+        <li class="nav-item">
+          <a class="nav-link" href="{{signInUrl}}">Sign In</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main body -->
+  <main role="main" class="container">
+    <!-- Debug output -->
+
+    <section class="main-temp">
+      <form>
+        <div class="form-group row">
+          <label for="contact" class="col-sm-2 col-form-label">Contact name</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="contact">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="project-name" class="col-sm-2 col-form-label">Project Name</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="project-name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputSubject" class="col-sm-2 col-form-label">Subject Name</label>
+          <div class="col-sm-10">
+            <input class="form-control" id="inputSubject">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="chooseTemplate" class="col-sm-2 col-form-label">Choose Template</label>
+          <select id="inputState" class="form-control">
+            <option selected>Spent hours report</option>
+            <option>...</option>
+          </select>
+        </div>
+      </form>
+
+      <button id="send-button" type="button" class="btn btn-primary">Create letter</button>
+
+    </section>
+
+    <!-- <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Debug</h5>
+        <pre class="bg-light border p-3"><code>{{debug}}</code></pre>
+      </div>
+    </div> -->
+  </main>
+
+
+  <script src="./js/main.js"></script>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

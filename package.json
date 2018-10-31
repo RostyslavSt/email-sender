@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-       "start": "nodemon node ./bin/www"
+    "start": "nodemon node ./bin/www",
+    "test": "http-server"
   },
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^1.0.0",
@@ -19,6 +20,7 @@
     "simple-oauth2": "^1.5.0"
   },
   "devDependencies": {
+    "http-server": "^0.11.1",
     "nodemon": "^1.18.4"
   }
 }

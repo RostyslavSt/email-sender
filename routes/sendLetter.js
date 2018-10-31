@@ -4,25 +4,25 @@ var router = express.Router();
 var authHelper = require('../helpers/auth');
 var graph = require('@microsoft/microsoft-graph-client');
 
+
 /* GET /contacts */
-router.get('/', async function (req, res, next) {
-  console.log('sttt1');
+router.post('/', async function (req, res, next) {
+  console.log(req.body);
+  console.log('step1');
+
   let parms = {
-    title: 'Contacts',
+    title: 'Send Letter',
     active: {
-      cont: true
+      sendLetter: true
     }
   };
 
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
-  console.log(accessToken);
-  console.log(userName);
-
-
+  console.log('step2');
   if (accessToken && userName) {
     parms.user = userName;
-    console.log('sttt2');
+    console.log('step2.1');
 
     // Initialize Graph client
     const client = graph.Client.init({
@@ -30,34 +30,34 @@ router.get('/', async function (req, res, next) {
         done(null, accessToken);
       }
     });
-
+    console.log('step3');
     try {
-    
-     const body = {
+      console.log('step4');
+      const body = {
         Message: {
-          Subject: "Meet for lunch?",
+          Subject: `${req.body.projectName} > ${req.body.subjectName}`,
           Body: {
             ContentType: "Text",
             Content: "The new cafeteria is open."
           },
-          ToRecipients: [
-            {
-              EmailAddress: {
-                Address: "rost.sht@gmail.com"
-              }
+          ToRecipients: [{
+            EmailAddress: {
+              Address: req.body.contactEmail
             }
-          ]        
+          }]
         },
         SaveToSentItems: "true"
       }
 
-     const result = await client
-      .api('/me/sendMail')
-      .post(body, (err, res) => {
-        console.log(res);
-        console.log(err);
-       });
-      console.log(result);
+      const result = await client
+        .api('/me/sendMail')
+        .post(body, (err, res) => {
+          console.log(res);
+          console.log(err);
+        });
+      // console.log(result);
+      // res.render('successSendLetter', parms);
+      res.send({status: "ok"});
     } catch (err) {
       parms.message = 'Error retrieving contacts';
       parms.error = {
@@ -68,9 +68,12 @@ router.get('/', async function (req, res, next) {
     }
 
   } else {
-    // Redirect to home
-    res.redirect('/');
+    res.send({
+      "status": "can't send the letter"
+    });
+    // res.redirect('/');
   }
+  // res.send({"stautus": JSON.stringify(req.body)});
 });
 
 module.exports = router;

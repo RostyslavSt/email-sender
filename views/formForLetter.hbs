@@ -1,0 +1,34 @@
+  <section class="main-temp">
+    <form>
+      <div class="form-group row">
+        <label for="contact" class="col-sm-2 col-form-label">Contact email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="contact">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="project-name" class="col-sm-2 col-form-label">Project Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" id="project-name">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputSubject" class="col-sm-2 col-form-label">Subject Name</label>
+        <div class="col-sm-10">
+          <input class="form-control" id="inputSubject" >
+        </div>
+      </div>
+      <div class="form-group row">
+          <label for="chooseTemplate" class="col-sm-2 col-form-label">Choose Template</label>
+          <select id="inputState" class="form-control">
+              <option selected>Spent hours report</option>
+              <option>...</option>
+            </select>
+        </div>
+    </form>
+
+    <button id="send-button" type="button" class="btn btn-primary">Create letter</button>
+
+  </section>
+
+  <script src="/js/sendDataForLetter.js"></script>
