@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var authHelper = require('../helpers/auth');
 var graph = require('@microsoft/microsoft-graph-client');
+let letterBodyTemplate = require('../templates/letterBodyTemplate');
 
 
 /* GET /contacts */
@@ -36,10 +37,10 @@ router.post('/', async function (req, res, next) {
       const body = {
         Message: {
           Subject: `${req.body.projectName} > ${req.body.subjectName}`,
-          Body: {
-            ContentType: "Text",
-            Content: req.body.bodyLetter
-          },
+          body: {
+        content: letterBodyTemplate(req.body.bodyLetter),
+        ContentType: "html"
+    },
           ToRecipients: [{
             EmailAddress: {
               Address: req.body.contactEmail
