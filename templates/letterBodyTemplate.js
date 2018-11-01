@@ -1,9 +1,7 @@
-let acceptedButtonStyle = require('../public/stylesheets/acceptedButtonStyle');
-
 function letterBodyTemplate(textMessage) {
   let acceptedButton = acceptedButtonStyle();
   const str = `
-    <section style="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <section>
     <p>${textMessage}</p>
     <div class="buttons-for-answer">
       <button type="button" style="color: #fff;background-color: #007bff;border-color: #007bff;border: 1px solid transparent; margin-right: 15px";>Accept</button>
