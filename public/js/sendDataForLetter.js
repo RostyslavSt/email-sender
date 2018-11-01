@@ -1,27 +1,20 @@
 const contactEmail = document.getElementById('contact');
 const projectName = document.getElementById('project-name');
 const subjectName = document.getElementById('inputSubject');
+const bodyLetter = document.getElementById('body-letter');
 const serverUrlForSendLetter = 'http://localhost:3000/sendLetter';
-// const serverUrlForSendLetter2 = 'http://localhost:3000/cont';
-// const serverUrlForSendLetter = 'http://localhost:9001/testPost';
-// const serverUrlForSendLetter = 'http://localhost:3000/testPost';
-
-
-
 const sendButton = document.getElementById('send-button');
 
 sendButton.addEventListener('click', () => {
-  // console.log('sdsdsd');
-  
   let data = {
     contactEmail: contactEmail.value,
     projectName: projectName.value,
-    subjectName: subjectName.value
+    subjectName: subjectName.value,
+    bodyLetter: bodyLetter.value
   }
-  // console.log(data);
+  // console.log(data)
   sendLetter(serverUrlForSendLetter, data);
-  // sendLetter2(serverUrlForSendLetter);
-  // console.log(data);
+
 });
 
 //func for send fetch request with POST method that to send letter 
@@ -42,7 +35,7 @@ function sendLetter(URL, data) {
       console.log('st2')
       console.dir(data);
     })
-    // .catch(error => console.log('Request failed', error));
+  // .catch(error => console.log('Request failed', error));
 }
 
 // function sendLetter2(URL) {
@@ -55,4 +48,3 @@ function sendLetter(URL, data) {
 //   })
 //   .catch(error => console.log('Request failed', error));
 // }
-

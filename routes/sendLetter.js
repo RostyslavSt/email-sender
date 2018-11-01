@@ -38,7 +38,7 @@ router.post('/', async function (req, res, next) {
           Subject: `${req.body.projectName} > ${req.body.subjectName}`,
           Body: {
             ContentType: "Text",
-            Content: "The new cafeteria is open."
+            Content: req.body.bodyLetter
           },
           ToRecipients: [{
             EmailAddress: {

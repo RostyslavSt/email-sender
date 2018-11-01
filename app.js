@@ -13,9 +13,7 @@ var authorize = require('./routes/authorize');
 var mail = require('./routes/mail');
 var calendar = require('./routes/calendar');
 var contacts = require('./routes/contacts');
-var cont = require('./routes/cont');
 var sendLetter = require('./routes/sendLetter');
-var send = require('./routes/send');
 var formForLetter = require('./routes/formForLetter');
 
 app.use(bodyParser.json());
@@ -61,7 +59,6 @@ app.use('/authorize', authorize);
 app.use('/mail', mail);
 app.use('/calendar', calendar);
 app.use('/contacts', contacts);
-app.use('/cont', cont);
 app.use('/formForLetter', formForLetter);
 app.use('/sendLetter', sendLetter);
 
