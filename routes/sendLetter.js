@@ -38,9 +38,9 @@ router.post('/', async function (req, res, next) {
         Message: {
           Subject: `${req.body.projectName} > ${req.body.subjectName}`,
           body: {
-        content: letterBodyTemplate(req.body.bodyLetter),
-        ContentType: "html"
-    },
+            content: letterBodyTemplate(req.body.bodyLetter),
+            ContentType: "html"
+          },
           ToRecipients: [{
             EmailAddress: {
               Address: req.body.contactEmail
@@ -53,12 +53,15 @@ router.post('/', async function (req, res, next) {
       const result = await client
         .api('/me/sendMail')
         .post(body, (err, res) => {
-          console.log(res);
+          console.log("response from server: ", res);
           console.log(err);
+          console.log('step5');
         });
       // console.log(result);
       // res.render('successSendLetter', parms);
-      res.send({status: "ok"});
+      res.send({
+        status: "ok"
+      });
     } catch (err) {
       parms.message = 'Error retrieving contacts';
       parms.error = {
